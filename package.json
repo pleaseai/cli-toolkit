@@ -28,8 +28,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target bun --format esm && tsc --emitDeclarationOnly --declaration --declarationDir dist",
-    "build:prod": "bun build src/index.ts --outdir dist --target bun --format esm --minify --sourcemap && tsc --emitDeclarationOnly --declaration --declarationDir dist",
+    "prebuild": "rm -rf dist",
+    "build": "bun build src/index.ts --outdir dist --target bun --format esm && bun build src/output/index.ts --outdir dist/output --target bun --format esm && bun build src/i18n/index.ts --outdir dist/i18n --target bun --format esm && bun build src/progress/index.ts --outdir dist/progress --target bun --format esm && bun build src/validation/index.ts --outdir dist/validation --target bun --format esm && tsc --emitDeclarationOnly --declaration --declarationDir dist",
+    "build:prod": "bun build src/index.ts --outdir dist --target bun --format esm --minify --sourcemap && bun build src/output/index.ts --outdir dist/output --target bun --format esm --minify --sourcemap && bun build src/i18n/index.ts --outdir dist/i18n --target bun --format esm --minify --sourcemap && bun build src/progress/index.ts --outdir dist/progress --target bun --format esm --minify --sourcemap && bun build src/validation/index.ts --outdir dist/validation --target bun --format esm --minify --sourcemap && tsc --emitDeclarationOnly --declaration --declarationDir dist",
     "type-check": "tsc --noEmit",
     "test": "bun test",
     "test:coverage": "bun test --coverage",
