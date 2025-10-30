@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0](https://github.com/pleaseai/cli-toolkit/compare/v0.1.0...v0.2.0) (2025-10-30)
+
+
+### Features
+
+* initial release of @pleaseai/cli-toolkit v0.1.0 ([80e1092](https://github.com/pleaseai/cli-toolkit/commit/80e10925cb1bc223d93a4dce4fdc10718e804081))
+
+
+### Bug Fixes
+
+* generate individual module JS files for subpath exports ([a0d8e35](https://github.com/pleaseai/cli-toolkit/commit/a0d8e356aad75a4dc6e8bac77b8689e7e357a8a3))
+
 ## [0.1.0] - 2025-01-30
 
 ### Added

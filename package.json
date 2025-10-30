@@ -1,7 +1,7 @@
 {
   "name": "@pleaseai/cli-toolkit",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared CLI utilities for LLM-focused command-line tools",
   "author": "PleaseAI",
   "license": "MIT",
