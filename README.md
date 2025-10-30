@@ -1,8 +1,8 @@
 # @pleaseai/cli-toolkit
 
 [![npm version](https://badge.fury.io/js/@pleaseai%2Fcli-toolkit.svg)](https://badge.fury.io/js/@pleaseai%2Fcli-toolkit)
-[![CI](https://github.com/pleaseai/gh-please/actions/workflows/ci.yml/badge.svg)](https://github.com/pleaseai/gh-please/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/github/pleaseai/gh-please/graph/badge.svg?token=BQKO959X1M)](https://codecov.io/github/pleaseai/gh-please)
+[![CI](https://github.com/pleaseai/gh-please/actions/workflows/ci.yml/badge.svg)](https://github.com/pleaseai/cli-toolkit/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/pleaseai/cli-toolkit/graph/badge.svg?token=lAPii2Uj1a)](https://codecov.io/gh/pleaseai/cli-toolkit)
 [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
 
 Shared CLI utilities for LLM-focused command-line tools.
