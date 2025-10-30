@@ -1,0 +1,14 @@
+telemetry = false
+
+[test]
+root = "./test"
+
+# Coverage configuration
+coverageSkipTestFiles = true
+coverageReporter = [
+  "text",
+  "lcov"
+]
+
+# Relative path works now that init.test.ts properly restores working directory
+coverageDir = "./coverage"
