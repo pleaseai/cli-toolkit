@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from 'bun:test'
-import { I18nManager } from '../../src/i18n/manager'
+import { i18n as globalI18n, I18nManager } from '../../src/i18n/manager'
 
 describe('I18nManager', () => {
   let i18n: I18nManager
@@ -19,6 +19,21 @@ describe('I18nManager', () => {
 
     expect(retrieved.creating).toBe('Creating issue...')
     expect(retrieved.created(123)).toBe('Issue #123 created!')
+  })
+
+  test('should allow registering multiple languages to same domain', () => {
+    i18n.register('test.multi', 'en', { msg: 'Hello' })
+    i18n.register('test.multi', 'ko', { msg: '안녕' })
+
+    expect(i18n.get('test.multi', 'en').msg).toBe('Hello')
+    expect(i18n.get('test.multi', 'ko').msg).toBe('안녕')
+  })
+
+  test('should allow overwriting messages for same domain and language', () => {
+    i18n.register('test.overwrite', 'en', { msg: 'First' })
+    i18n.register('test.overwrite', 'en', { msg: 'Second' })
+
+    expect(i18n.get('test.overwrite', 'en').msg).toBe('Second')
   })
 
   test('should support multiple languages', () => {
@@ -78,5 +93,17 @@ describe('I18nManager', () => {
   test('should return empty array for nonexistent domain languages', () => {
     const languages = i18n.getLanguages('nonexistent')
     expect(languages).toEqual([])
+  })
+})
+
+describe('Global i18n instance', () => {
+  test('should be an instance of I18nManager', () => {
+    expect(globalI18n).toBeInstanceOf(I18nManager)
+  })
+
+  test('should be a shared singleton instance', () => {
+    globalI18n.register('test.global', 'en', { msg: 'Test' })
+    expect(globalI18n.has('test.global')).toBe(true)
+    expect(globalI18n.get('test.global', 'en').msg).toBe('Test')
   })
 })
