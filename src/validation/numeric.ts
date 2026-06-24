@@ -1,10 +1,12 @@
+import { CliError, VALIDATION_ERROR } from '../errors/error.ts'
+
 /**
  * Validate that a string represents a positive integer
  *
  * @param value - String value to validate
  * @param fieldName - Field name for error messages (default: "Value")
  * @returns Parsed positive integer
- * @throws {Error} If value is not a positive integer
+ * @throws {CliError} If value is not a positive integer (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -18,12 +20,12 @@
 export function validatePositiveInteger(value: string, fieldName = 'Value'): number {
   // Check if the string contains only digits
   if (!/^\d+$/.test(value)) {
-    throw new Error(`${fieldName} must be a positive integer`)
+    throw new CliError(`${fieldName} must be a positive integer`, VALIDATION_ERROR)
   }
 
   const parsed = Number.parseInt(value, 10)
   if (Number.isNaN(parsed) || parsed <= 0) {
-    throw new Error(`${fieldName} must be a positive integer`)
+    throw new CliError(`${fieldName} must be a positive integer`, VALIDATION_ERROR)
   }
   return parsed
 }
@@ -34,7 +36,7 @@ export function validatePositiveInteger(value: string, fieldName = 'Value'): num
  * @param value - Value to validate (string or number)
  * @param fieldName - Field name for error messages (default: "Value")
  * @returns Parsed positive integer
- * @throws {Error} If value is not a positive integer
+ * @throws {CliError} If value is not a positive integer (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -48,7 +50,7 @@ export function validateNumericId(value: string | number, fieldName = 'ID'): num
   const num = typeof value === 'string' ? Number.parseInt(value, 10) : value
 
   if (Number.isNaN(num) || num <= 0 || !Number.isInteger(num)) {
-    throw new Error(`${fieldName} must be a positive integer`)
+    throw new CliError(`${fieldName} must be a positive integer`, VALIDATION_ERROR)
   }
 
   return num
@@ -62,7 +64,7 @@ export function validateNumericId(value: string | number, fieldName = 'ID'): num
  * @param max - Maximum value (inclusive)
  * @param fieldName - Field name for error messages (default: "Value")
  * @returns The validated number
- * @throws {Error} If value is outside the range
+ * @throws {CliError} If value is outside the range (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -79,7 +81,7 @@ export function validateRange(
   fieldName = 'Value',
 ): number {
   if (value < min || value > max) {
-    throw new Error(`${fieldName} must be between ${min} and ${max}`)
+    throw new CliError(`${fieldName} must be between ${min} and ${max}`, VALIDATION_ERROR)
   }
   return value
 }

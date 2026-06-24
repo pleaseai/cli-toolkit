@@ -1,4 +1,5 @@
 import type { OutputFormat, OutputOptions } from './types.ts'
+import { CliError, VALIDATION_ERROR } from '../errors/error.ts'
 import { filterFields } from './filter.ts'
 import { outputToon } from './toon.ts'
 
@@ -61,7 +62,7 @@ export function isValidFormat(format: unknown): format is OutputFormat {
  *
  * @param format - Format string to validate
  * @returns The validated format
- * @throws {Error} If format is not valid
+ * @throws {CliError} If format is not valid (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -75,8 +76,9 @@ export function validateFormat(format: unknown): OutputFormat {
     const formatStr = format === undefined || format === null
       ? String(format)
       : `${format}`
-    throw new Error(
+    throw new CliError(
       `Invalid output format: ${formatStr}. Supported formats: ${VALID_FORMATS.join(', ')}`,
+      VALIDATION_ERROR,
     )
   }
   return format

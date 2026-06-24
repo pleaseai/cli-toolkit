@@ -1,10 +1,12 @@
+import { CliError, VALIDATION_ERROR } from '../errors/error.ts'
+
 /**
  * Validate that a string is not empty (after trimming)
  *
  * @param value - String value to validate
  * @param fieldName - Field name for error messages (default: "Value")
  * @returns Trimmed non-empty string
- * @throws {Error} If value is empty or undefined
+ * @throws {CliError} If value is empty or undefined (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -21,7 +23,7 @@ export function validateNonEmptyString(
   fieldName = 'Value',
 ): string {
   if (!value || value.trim().length === 0) {
-    throw new Error(`${fieldName} cannot be empty`)
+    throw new CliError(`${fieldName} cannot be empty`, VALIDATION_ERROR)
   }
   return value.trim()
 }
@@ -33,7 +35,7 @@ export function validateNonEmptyString(
  * @param maxLength - Maximum allowed length
  * @param fieldName - Field name for error messages (default: "Value")
  * @returns The validated string
- * @throws {Error} If value exceeds maxLength
+ * @throws {CliError} If value exceeds maxLength (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -48,8 +50,9 @@ export function validateMaxLength(
   fieldName = 'Value',
 ): string {
   if (value.length > maxLength) {
-    throw new Error(
+    throw new CliError(
       `${fieldName} cannot exceed ${maxLength} characters (got ${value.length})`,
+      VALIDATION_ERROR,
     )
   }
   return value
@@ -62,7 +65,7 @@ export function validateMaxLength(
  * @param maxLength - Maximum allowed length
  * @param fieldName - Field name for error messages (default: "Value")
  * @returns Trimmed, validated string
- * @throws {Error} If value is empty or exceeds maxLength
+ * @throws {CliError} If value is empty or exceeds maxLength (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -89,7 +92,7 @@ export function validateString(
  * @param fieldName - Field name for error messages (default: "Value")
  * @param patternDescription - Human-readable pattern description
  * @returns The validated string
- * @throws {Error} If value doesn't match the pattern
+ * @throws {CliError} If value doesn't match the pattern (code: `VALIDATION_ERROR`)
  *
  * @example
  * ```typescript
@@ -113,7 +116,7 @@ export function validatePattern(
     const description = patternDescription
       ? `be ${patternDescription}`
       : `match pattern ${pattern.toString()}`
-    throw new Error(`${fieldName} must ${description}`)
+    throw new CliError(`${fieldName} must ${description}`, VALIDATION_ERROR)
   }
   return value
 }

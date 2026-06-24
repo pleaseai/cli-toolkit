@@ -2,6 +2,7 @@
   "name": "@pleaseai/cli-toolkit",
   "type": "module",
   "version": "0.2.0",
+  "packageManager": "bun@1.3.14",
   "description": "Shared CLI utilities for LLM-focused command-line tools",
   "author": "PleaseAI",
   "license": "MIT",
@@ -12,14 +13,16 @@
     "output",
     "i18n",
     "validation",
-    "progress"
+    "progress",
+    "errors"
   ],
   "exports": {
     ".": "./dist/index.js",
     "./output": "./dist/output/index.js",
     "./i18n": "./dist/i18n/index.js",
     "./progress": "./dist/progress/index.js",
-    "./validation": "./dist/validation/index.js"
+    "./validation": "./dist/validation/index.js",
+    "./errors": "./dist/errors/index.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -29,8 +32,8 @@
   ],
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "bun build src/index.ts --outdir dist --target bun --format esm && bun build src/output/index.ts --outdir dist/output --target bun --format esm && bun build src/i18n/index.ts --outdir dist/i18n --target bun --format esm && bun build src/progress/index.ts --outdir dist/progress --target bun --format esm && bun build src/validation/index.ts --outdir dist/validation --target bun --format esm && tsc --emitDeclarationOnly --declaration --declarationDir dist",
-    "build:prod": "bun build src/index.ts --outdir dist --target bun --format esm --minify --sourcemap && bun build src/output/index.ts --outdir dist/output --target bun --format esm --minify --sourcemap && bun build src/i18n/index.ts --outdir dist/i18n --target bun --format esm --minify --sourcemap && bun build src/progress/index.ts --outdir dist/progress --target bun --format esm --minify --sourcemap && bun build src/validation/index.ts --outdir dist/validation --target bun --format esm --minify --sourcemap && tsc --emitDeclarationOnly --declaration --declarationDir dist",
+    "build": "bun build src/index.ts --outdir dist --target bun --format esm && bun build src/output/index.ts --outdir dist/output --target bun --format esm && bun build src/i18n/index.ts --outdir dist/i18n --target bun --format esm && bun build src/progress/index.ts --outdir dist/progress --target bun --format esm && bun build src/validation/index.ts --outdir dist/validation --target bun --format esm && bun build src/errors/index.ts --outdir dist/errors --target bun --format esm && tsc --emitDeclarationOnly --declaration --declarationDir dist",
+    "build:prod": "bun build src/index.ts --outdir dist --target bun --format esm --minify --sourcemap && bun build src/output/index.ts --outdir dist/output --target bun --format esm --minify --sourcemap && bun build src/i18n/index.ts --outdir dist/i18n --target bun --format esm --minify --sourcemap && bun build src/progress/index.ts --outdir dist/progress --target bun --format esm --minify --sourcemap && bun build src/validation/index.ts --outdir dist/validation --target bun --format esm --minify --sourcemap && bun build src/errors/index.ts --outdir dist/errors --target bun --format esm --minify --sourcemap && tsc --emitDeclarationOnly --declaration --declarationDir dist",
     "type-check": "tsc --noEmit",
     "test": "bun test",
     "test:coverage": "bun test --coverage",

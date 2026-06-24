@@ -13,6 +13,7 @@ Shared CLI utilities for LLM-focused command-line tools.
 - **Internationalization**: Language detection and message management (Korean/English)
 - **Progress Indicators**: Emoji-based status messages for long-running operations
 - **Input Validation**: Type-safe validation for common input patterns
+- **Structured Errors**: Machine-readable error codes, suggestions, and exit-code mapping for agent-friendly CLIs
 
 ## Installation
 
@@ -114,6 +115,46 @@ const username = validatePattern('user123', /^[a-z0-9]+$/, 'Username', 'alphanum
 // validatePattern('user-123', /^[a-z0-9]+$/, 'Username') → throws "Username must be alphanumeric only"
 ```
 
+### Errors Module
+
+Throw structured errors with machine-readable codes and render them consistently
+for agents to parse:
+
+```typescript
+import {
+  CliError,
+  exitCodeForError,
+  toErrorOutput,
+  VALIDATION_ERROR,
+} from '@pleaseai/cli-toolkit/errors'
+import { outputData } from '@pleaseai/cli-toolkit/output'
+
+try {
+  if (!issue)
+    throw new CliError('Issue #999 not found', 'NOT_FOUND', ['Run `gh-please issue list`'])
+}
+catch (error) {
+  // Render a stable { error, code, help } payload (JSON or TOON)
+  outputData(toErrorOutput(error), 'toon')
+  // Map to a process exit code (2 for validation errors, otherwise 1)
+  process.exitCode = exitCodeForError(error)
+}
+```
+
+The built-in validators already throw `CliError` tagged with `VALIDATION_ERROR`
+(exit code `2`), so wrapping a command in the `try/catch` above gives you
+consistent structured errors and exit codes for free.
+
+The `collapseHomeDirectory` helper (in the output module) keeps paths portable
+in structured output:
+
+```typescript
+import { collapseHomeDirectory } from '@pleaseai/cli-toolkit/output'
+
+collapseHomeDirectory('/Users/alice/project/bin', '/Users/alice') // '~/project/bin'
+// The home directory defaults to os.homedir() when omitted.
+```
+
 ## API Reference
 
 ### Output Module
@@ -125,6 +166,7 @@ const username = validatePattern('user123', /^[a-z0-9]+$/, 'Username', 'alphanum
 - `filterFields(data, fields)` - Filter object/array to specified fields
 - `isStructuredOutput(options)` - Check if structured output is requested
 - `validateFormat(format)` - Validate output format
+- `collapseHomeDirectory(path, homeDir?)` - Replace a leading home-dir prefix with `~`
 
 ### i18n Module
 
@@ -159,6 +201,16 @@ const username = validatePattern('user123', /^[a-z0-9]+$/, 'Username', 'alphanum
 - `validateMaxLength(value, maxLength, fieldName?)` - Validate string length
 - `validateString(value, maxLength, fieldName?)` - Validate non-empty + max length
 - `validatePattern(value, pattern, fieldName?, description?)` - Validate regex pattern
+
+> Validators throw `CliError` with code `VALIDATION_ERROR` (a subclass of `Error`, so existing `try/catch` keeps working).
+
+### Errors Module
+
+- `CliError` - Structured error with `code` and `suggestions`
+- `exitCodeForError(error)` - Map an error to a process exit code (`2` for validation, else `1`)
+- `errorOutput(message, code, suggestions?)` - Build a `{ error, code, help? }` payload
+- `toErrorOutput(error)` - Convert any thrown value into a structured payload
+- `VALIDATION_ERROR` / `UNKNOWN_ERROR` - Built-in error code constants
 
 ## TypeScript Support
 
