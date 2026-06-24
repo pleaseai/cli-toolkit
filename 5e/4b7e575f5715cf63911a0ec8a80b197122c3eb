@@ -1,0 +1,72 @@
+package.json
+  s_c5e120d244d9f4::t_320939c783497e 35-36
+  s_c5e120d244d9f4::t_d40e7bc779537c 16-17
+  s_c5e120d244d9f4::t_ebf2433de5d855 24-25
+  s_c5e120d244d9f4::t_49e741cf5548c8 5
+src/errors/error.ts
+  s_c5e120d244d9f4::t_27620a9ea1c031 1-74
+src/validation/numeric.ts
+  s_c5e120d244d9f4::t_9b31472c201440 67
+  s_c5e120d244d9f4::t_3eb10bf01a6de9 84
+  s_c5e120d244d9f4::t_6aa640e2b0dbb6 1-2,9
+  s_c5e120d244d9f4::t_396e7833a5ded9 23,28,53
+  s_c5e120d244d9f4::t_daa3fd715a065c 39
+README.md
+  s_c5e120d244d9f4::t_823290017667af 118-153,156-157
+  s_c5e120d244d9f4::t_0e164799329882 16
+  s_c5e120d244d9f4::t_7c4836d1819b3d 169
+  s_c5e120d244d9f4::t_6b57c9f22f1239 154-155
+  s_c5e120d244d9f4::t_ca1ed820d18f8a 205-214
+test/errors/validation-integration.test.ts
+  s_c5e120d244d9f4::t_a1e3609743cf4c 1-14,17-41
+  s_c5e120d244d9f4::t_a90765a6f8a892 15-16
+src/output/index.ts
+  s_c5e120d244d9f4::t_278f12ee21d075 16-18
+test/output/path.test.ts
+  s_c5e120d244d9f4::t_990daa51a49f57 1-16,21-33
+  s_c5e120d244d9f4::t_e9059a3652bb0f 17-20
+src/output/json.ts
+  s_c5e120d244d9f4::t_41d4bae52db373 79,81
+  s_c5e120d244d9f4::t_18aac24a2d64a7 2
+  s_c5e120d244d9f4::t_a94c05a3a100c3 65
+src/errors/output.ts
+  s_c5e120d244d9f4::t_155373f49e15a0 1-76
+src/output/path.ts
+  s_c5e120d244d9f4::t_12aa3e926f1168 30-37
+  s_c5e120d244d9f4::t_1f46db86e6036c 1-29,38
+test/errors/output.test.ts
+  s_c5e120d244d9f4::t_a31aee632a2160 1-58
+src/index.ts
+  s_c5e120d244d9f4::t_8d2434b5a4a945 46
+  s_c5e120d244d9f4::t_1358faf8236d0e 12
+  s_c5e120d244d9f4::t_435b53e6692784 50-51
+  s_c5e120d244d9f4::t_a90765a6f8a892 13-29
+src/validation/text.ts
+  s_c5e120d244d9f4::t_ec5d397d0b117a 95
+  s_c5e120d244d9f4::t_21fa44b2e6f1e7 119
+  s_c5e120d244d9f4::t_085a3d43fdfadf 26
+  s_c5e120d244d9f4::t_e6ed2592514510 1-2,9
+  s_c5e120d244d9f4::t_852a33f38decb7 38
+  s_c5e120d244d9f4::t_72677686f2b712 53,55
+  s_c5e120d244d9f4::t_37e08a9e71cf25 68
+test/errors/error.test.ts
+  s_c5e120d244d9f4::t_61d1a75945fb11 1-61
+src/errors/index.ts
+  s_c5e120d244d9f4::t_17b71617b15a37 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.11",
+  "base_commit_sha": "5e4b7e575f5715cf63911a0ec8a80b197122c3eb",
+  "prompts": {},
+  "sessions": {
+    "s_c5e120d244d9f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d2ebef9a-2e3e-45d9-8c6d-e2410262b960",
+        "model": "unknown"
+      },
+      "human_author": null
+    }
+  }
+}
