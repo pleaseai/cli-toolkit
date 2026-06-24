@@ -1,0 +1,20 @@
+skills/agent-dx-cli-scale/SKILL.md
+  s_c5e120d244d9f4::t_845be8243c83c4 1-11,13-114
+  s_c5e120d244d9f4::t_2a1e1e95e0374d 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.11",
+  "base_commit_sha": "4cafaca5ef8cac4cc8b021f95cf39b4c495ead3d",
+  "prompts": {},
+  "sessions": {
+    "s_c5e120d244d9f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d2ebef9a-2e3e-45d9-8c6d-e2410262b960",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Minsu Lee <minsu.lee@pleaseai.dev>"
+    }
+  }
+}
