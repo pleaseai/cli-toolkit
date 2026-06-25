@@ -13,6 +13,9 @@ export type { OutputFormat, OutputOptions } from './types.ts'
 // Field filtering
 export { parseFields, filterFields } from './filter.ts'
 
+// Path display helpers
+export { collapseHomeDirectory } from './path.ts'
+
 // TOON output
 export { encodeToon, outputToon } from './toon.ts'
 

@@ -9,7 +9,25 @@
  */
 
 // ============================================================================
-// Output Module
+// Errors Module
+// ============================================================================
+
+export {
+  // Structured error class, codes, and exit-code mapping
+  CliError,
+  // Structured error output
+  errorOutput,
+  exitCodeForError,
+  isCliError,
+  toErrorOutput,
+  UNKNOWN_ERROR,
+  VALIDATION_ERROR,
+} from './errors/index.ts'
+
+export type { ErrorOutput } from './errors/index.ts'
+
+// ============================================================================
+// i18n Module
 // ============================================================================
 
 export {
@@ -26,10 +44,12 @@ export {
 export type { CommonMessages, Language, MessageDictionary } from './i18n/types.ts'
 
 // ============================================================================
-// i18n Module
+// Output Module
 // ============================================================================
 
 export {
+  // Path display helpers
+  collapseHomeDirectory,
   // TOON output
   encodeToon,
   filterFields,
