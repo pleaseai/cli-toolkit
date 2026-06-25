@@ -12,6 +12,7 @@
 export {
   CliError,
   exitCodeForError,
+  isCliError,
   UNKNOWN_ERROR,
   VALIDATION_ERROR,
 } from './error.ts'

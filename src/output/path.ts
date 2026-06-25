@@ -24,14 +24,20 @@ import { homedir } from 'node:os'
  * ```
  */
 export function collapseHomeDirectory(path: string, homeDir = homedir()): string {
-  if (!homeDir || !path.startsWith(homeDir)) {
+  if (!homeDir) {
+    return path
+  }
+  // Drop any trailing separator so a caller-supplied `~/` or `C:\Users\alice\`
+  // still matches and the collapsed result keeps a single boundary separator.
+  const normalizedHome = homeDir.replace(/[/\\]+$/, '')
+  if (!normalizedHome || !path.startsWith(normalizedHome)) {
     return path
   }
   // Require a real path boundary after the prefix so a sibling directory that
   // merely shares the home basename (e.g. `/Users/alicebob` vs `/Users/alice`)
-  // is not collapsed.
-  const rest = path.slice(homeDir.length)
-  if (rest === '' || rest.startsWith('/')) {
+  // is not collapsed. Accept both POSIX (`/`) and Windows (`\`) separators.
+  const rest = path.slice(normalizedHome.length)
+  if (rest === '' || rest.startsWith('/') || rest.startsWith('\\')) {
     return `~${rest}`
   }
   return path

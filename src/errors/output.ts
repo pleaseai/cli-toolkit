@@ -1,4 +1,4 @@
-import { CliError, UNKNOWN_ERROR } from './error.ts'
+import { isCliError, UNKNOWN_ERROR } from './error.ts'
 
 /**
  * Structured, machine-readable error payload.
@@ -68,8 +68,8 @@ export function errorOutput(
  * ```
  */
 export function toErrorOutput(error: unknown): ErrorOutput {
-  if (error instanceof CliError) {
-    return errorOutput(error.message, error.code, error.suggestions)
+  if (isCliError(error)) {
+    return errorOutput(error.message, error.code, error.suggestions ?? [])
   }
   const message = error instanceof Error ? error.message : String(error)
   return errorOutput(message, UNKNOWN_ERROR)

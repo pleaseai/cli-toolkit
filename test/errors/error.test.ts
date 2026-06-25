@@ -1,5 +1,20 @@
 import { describe, expect, test } from 'bun:test'
-import { CliError, exitCodeForError, UNKNOWN_ERROR, VALIDATION_ERROR } from '../../src/errors/error'
+import { CliError, exitCodeForError, isCliError, UNKNOWN_ERROR, VALIDATION_ERROR } from '../../src/errors/error'
+
+/**
+ * A `CliError` from a second copy of the module: same shape, distinct class.
+ * Reproduces the multi-instance scenario where `instanceof CliError` fails.
+ */
+class ForeignCliError extends Error {
+  constructor(
+    message: string,
+    public readonly code: string = UNKNOWN_ERROR,
+    public readonly suggestions: string[] = [],
+  ) {
+    super(message)
+    this.name = 'CliError'
+  }
+}
 
 describe('CliError', () => {
   test('should be an instance of Error', () => {
@@ -41,9 +56,33 @@ describe('CliError', () => {
   })
 })
 
+describe('isCliError', () => {
+  test('should recognize a CliError instance', () => {
+    expect(isCliError(new CliError('boom'))).toBe(true)
+  })
+
+  test('should recognize a CliError from another module copy by shape', () => {
+    expect(isCliError(new ForeignCliError('boom', VALIDATION_ERROR))).toBe(true)
+  })
+
+  test('should reject a generic Error', () => {
+    expect(isCliError(new Error('boom'))).toBe(false)
+  })
+
+  test('should reject non-error values', () => {
+    expect(isCliError('boom')).toBe(false)
+    expect(isCliError({ name: 'CliError', code: 'X' })).toBe(false)
+    expect(isCliError(undefined)).toBe(false)
+  })
+})
+
 describe('exitCodeForError', () => {
   test('should return 2 for validation errors', () => {
     expect(exitCodeForError(new CliError('bad', VALIDATION_ERROR))).toBe(2)
+  })
+
+  test('should return 2 for a validation CliError from another module copy', () => {
+    expect(exitCodeForError(new ForeignCliError('bad', VALIDATION_ERROR))).toBe(2)
   })
 
   test('should return 1 for CliError with a non-validation code', () => {

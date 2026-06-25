@@ -17,12 +17,30 @@
     "errors"
   ],
   "exports": {
-    ".": "./dist/index.js",
-    "./output": "./dist/output/index.js",
-    "./i18n": "./dist/i18n/index.js",
-    "./progress": "./dist/progress/index.js",
-    "./validation": "./dist/validation/index.js",
-    "./errors": "./dist/errors/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./output": {
+      "types": "./dist/output/index.d.ts",
+      "default": "./dist/output/index.js"
+    },
+    "./i18n": {
+      "types": "./dist/i18n/index.d.ts",
+      "default": "./dist/i18n/index.js"
+    },
+    "./progress": {
+      "types": "./dist/progress/index.d.ts",
+      "default": "./dist/progress/index.js"
+    },
+    "./validation": {
+      "types": "./dist/validation/index.d.ts",
+      "default": "./dist/validation/index.js"
+    },
+    "./errors": {
+      "types": "./dist/errors/index.d.ts",
+      "default": "./dist/errors/index.js"
+    }
   },
   "main": "dist/index.js",
   "module": "dist/index.js",

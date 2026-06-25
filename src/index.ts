@@ -18,6 +18,7 @@ export {
   // Structured error output
   errorOutput,
   exitCodeForError,
+  isCliError,
   toErrorOutput,
   UNKNOWN_ERROR,
   VALIDATION_ERROR,

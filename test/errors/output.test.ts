@@ -1,6 +1,18 @@
 import { describe, expect, test } from 'bun:test'
-import { CliError, VALIDATION_ERROR } from '../../src/errors/error'
+import { CliError, UNKNOWN_ERROR, VALIDATION_ERROR } from '../../src/errors/error'
 import { errorOutput, toErrorOutput } from '../../src/errors/output'
+
+/** A `CliError` from a second module copy: same shape, distinct class. */
+class ForeignCliError extends Error {
+  constructor(
+    message: string,
+    public readonly code: string = UNKNOWN_ERROR,
+    public readonly suggestions: string[] = [],
+  ) {
+    super(message)
+    this.name = 'CliError'
+  }
+}
 
 describe('errorOutput', () => {
   test('should build a minimal payload without suggestions', () => {
@@ -27,6 +39,15 @@ describe('errorOutput', () => {
 describe('toErrorOutput', () => {
   test('should preserve code and suggestions from a CliError', () => {
     const error = new CliError('Issue not found', 'NOT_FOUND', ['run list'])
+    expect(toErrorOutput(error)).toEqual({
+      error: 'Issue not found',
+      code: 'NOT_FOUND',
+      help: ['run list'],
+    })
+  })
+
+  test('should preserve code and suggestions from a CliError of another module copy', () => {
+    const error = new ForeignCliError('Issue not found', 'NOT_FOUND', ['run list'])
     expect(toErrorOutput(error)).toEqual({
       error: 'Issue not found',
       code: 'NOT_FOUND',
