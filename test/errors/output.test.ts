@@ -63,17 +63,17 @@ describe('toErrorOutput', () => {
     })
   })
 
-  test('should fall back to UNKNOWN for a generic Error', () => {
+  test('should fall back to UNKNOWN_ERROR for a generic Error', () => {
     expect(toErrorOutput(new Error('boom'))).toEqual({
       error: 'boom',
-      code: 'UNKNOWN',
+      code: 'UNKNOWN_ERROR',
     })
   })
 
   test('should stringify a non-error value', () => {
     expect(toErrorOutput('boom')).toEqual({
       error: 'boom',
-      code: 'UNKNOWN',
+      code: 'UNKNOWN_ERROR',
     })
   })
 })

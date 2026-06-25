@@ -51,8 +51,8 @@ export function errorOutput(
  * Convert any thrown value into a structured error payload.
  *
  * - {@link CliError} preserves its `code` and `suggestions`.
- * - A generic `Error` keeps its message with code `'UNKNOWN'`.
- * - Any other value is stringified with code `'UNKNOWN'`.
+ * - A generic `Error` keeps its message with code `'UNKNOWN_ERROR'`.
+ * - Any other value is stringified with code `'UNKNOWN_ERROR'`.
  *
  * @param error - Any thrown value
  * @returns Structured error payload

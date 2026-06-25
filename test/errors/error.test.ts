@@ -27,9 +27,9 @@ describe('CliError', () => {
     expect(new CliError('boom').message).toBe('boom')
   })
 
-  test('should default code to UNKNOWN', () => {
+  test('should default code to UNKNOWN_ERROR', () => {
     expect(new CliError('boom').code).toBe(UNKNOWN_ERROR)
-    expect(UNKNOWN_ERROR).toBe('UNKNOWN')
+    expect(UNKNOWN_ERROR).toBe('UNKNOWN_ERROR')
   })
 
   test('should carry a custom code', () => {
