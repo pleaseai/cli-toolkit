@@ -145,6 +145,21 @@ The built-in validators already throw `CliError` tagged with `VALIDATION_ERROR`
 (exit code `2`), so wrapping a command in the `try/catch` above gives you
 consistent structured errors and exit codes for free.
 
+> **Detecting a `CliError`:** use the `isCliError(error)` type guard instead of a
+> bare `error instanceof CliError`. Each subpath (`/errors`, `/output`,
+> `/validation`) bundles its own copy of `CliError`, so a direct `instanceof`
+> check can silently return `false` for an error thrown by a different subpath
+> (or by a second copy of the package in the dependency tree). `isCliError`,
+> `toErrorOutput`, and `exitCodeForError` already handle this for you.
+
+```typescript
+import { isCliError } from '@pleaseai/cli-toolkit/errors'
+
+if (isCliError(error)) {
+  // error.code / error.suggestions are safe to read here
+}
+```
+
 The `collapseHomeDirectory` helper (in the output module) keeps paths portable
 in structured output:
 
@@ -207,6 +222,7 @@ collapseHomeDirectory('/Users/alice/project/bin', '/Users/alice') // '~/project/
 ### Errors Module
 
 - `CliError` - Structured error with `code` and `suggestions`
+- `isCliError(error)` - Type guard for `CliError`, robust across subpath/version boundaries (prefer over `instanceof`)
 - `exitCodeForError(error)` - Map an error to a process exit code (`2` for validation, else `1`)
 - `errorOutput(message, code, suggestions?)` - Build a `{ error, code, help? }` payload
 - `toErrorOutput(error)` - Convert any thrown value into a structured payload
