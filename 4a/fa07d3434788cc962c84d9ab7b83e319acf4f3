@@ -1,0 +1,26 @@
+test/errors/output.test.ts
+  s_c1ef70f73c79be::t_d851d03eb918e2 66,69,76
+src/errors/output.ts
+  s_c1ef70f73c79be::t_ccc61a353aaf73 54-55
+src/errors/error.ts
+  s_c1ef70f73c79be::t_fe671f9c2d70f2 38
+  s_c1ef70f73c79be::t_15152614fbc09f 14
+test/errors/error.test.ts
+  s_c1ef70f73c79be::t_04e267fe426e79 30,32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.13",
+  "base_commit_sha": "4afa07d3434788cc962c84d9ab7b83e319acf4f3",
+  "prompts": {},
+  "sessions": {
+    "s_c1ef70f73c79be": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85811aaf-9541-4c5c-9a75-883a747c1a5c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Minsu Lee <minsu.lee@pleaseai.dev>"
+    }
+  }
+}
