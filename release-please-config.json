@@ -4,6 +4,7 @@
       "release-type": "node",
       "package-name": "@pleaseai/cli-toolkit",
       "changelog-path": "CHANGELOG.md",
+      "bump-minor-pre-major": true,
       "extra-files": [
         "package.json"
       ]
