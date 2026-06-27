@@ -14,13 +14,13 @@ coverage:
         threshold: 0%
 
 comment:
-  layout: "reach, diff, flags, files"
+  layout: 'reach, diff, flags, files'
   behavior: default
   require_changes: false
 
 # Source-only coverage: tests, build output, and type-only files add noise.
 ignore:
-  - "test"
-  - "dist"
-  - "**/*.test.ts"
-  - "**/*.d.ts"
+  - test
+  - dist
+  - '**/*.test.ts'
+  - '**/*.d.ts'
