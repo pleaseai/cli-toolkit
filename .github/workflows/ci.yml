@@ -32,10 +32,7 @@ jobs:
       - name: Type check
         run: bun run type-check
 
-      - name: Run tests
-        run: bun test
-
-      - name: Generate coverage report
+      - name: Run tests with coverage
         run: bun run test:coverage
 
       - name: Upload coverage reports to Codecov
