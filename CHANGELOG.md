@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/pleaseai/cli-toolkit/compare/v0.2.0...v0.3.0) (2026-06-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **errors:** the 'code' field of unknown/fallback errors (toErrorOutput) and CliError's default code change from 'UNKNOWN' to 'UNKNOWN_ERROR'. Consumers comparing against the literal 'UNKNOWN' must update; using the exported UNKNOWN_ERROR constant is unaffected.
+
+### Features
+
+* add structured errors module and home-path collapsing ([#6](https://github.com/pleaseai/cli-toolkit/issues/6)) ([fd0a64f](https://github.com/pleaseai/cli-toolkit/commit/fd0a64f1293df21c852df4093b67c400322cf7ea))
+
+
+### Bug Fixes
+
+* **errors:** align UNKNOWN_ERROR value + document isCliError guard ([#8](https://github.com/pleaseai/cli-toolkit/issues/8)) ([caa4d68](https://github.com/pleaseai/cli-toolkit/commit/caa4d68b95f6aab367eaf4fcd836526a832c7275))
+
 ## [0.2.0](https://github.com/pleaseai/cli-toolkit/compare/v0.1.0...v0.2.0) (2025-10-30)
 
 
