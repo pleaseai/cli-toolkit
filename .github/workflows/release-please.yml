@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git tag to publish (e.g. v0.3.0) when re-running a release
+        required: true
 
 permissions:
   contents: write
@@ -31,14 +36,25 @@ jobs:
 
   npm-publish:
     needs: release-please
-    if: ${{ needs.release-please.outputs.release_created }}
+    # Publish on a fresh release, or manually for a given tag via workflow_dispatch.
+    if: ${{ needs.release-please.outputs.release_created || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # required for npm provenance (OIDC)
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
 
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
 
       - name: Cache Bun dependencies
         uses: actions/cache@v4
@@ -54,7 +70,12 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Publish to npm
-        run: bun publish
+      # bun publish does not support npm provenance; build the tarball with bun
+      # and publish it via npm with --provenance (id-token: write enables OIDC).
+      - name: Pack tarball
+        run: bun pm pack
+
+      - name: Publish to npm (with provenance)
+        run: npm publish ./*.tgz --provenance --access public
         env:
-          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

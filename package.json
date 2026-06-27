@@ -6,6 +6,10 @@
   "description": "Shared CLI utilities for LLM-focused command-line tools",
   "author": "PleaseAI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pleaseai/cli-toolkit.git"
+  },
   "keywords": [
     "cli",
     "toolkit",
