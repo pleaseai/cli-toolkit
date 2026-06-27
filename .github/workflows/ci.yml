@@ -18,6 +18,8 @@ jobs:
         with:
           # Full history so SonarCloud can attribute new code / blame accurately.
           fetch-depth: 0
+          # No later step needs authenticated git; keep the token out of .git/config.
+          persist-credentials: false
 
       - uses: oven-sh/setup-bun@v2
         with:
