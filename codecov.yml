@@ -1,0 +1,26 @@
+# Codecov configuration
+# Docs: https://docs.codecov.com/docs/codecov-yaml
+coverage:
+  status:
+    project:
+      default:
+        # Compare against the base commit; allow a small dip to avoid flaky failures.
+        target: auto
+        threshold: 1%
+    patch:
+      default:
+        # New/changed lines in a PR should be well covered.
+        target: 80%
+        threshold: 0%
+
+comment:
+  layout: 'reach, diff, flags, files'
+  behavior: default
+  require_changes: false
+
+# Source-only coverage: tests, build output, and type-only files add noise.
+ignore:
+  - test
+  - dist
+  - '**/*.test.ts'
+  - '**/*.d.ts'
