@@ -11,7 +11,7 @@ export const VALIDATION_ERROR = 'VALIDATION_ERROR'
  *
  * Maps to process exit code `1` via {@link exitCodeForError}.
  */
-export const UNKNOWN_ERROR = 'UNKNOWN'
+export const UNKNOWN_ERROR = 'UNKNOWN_ERROR'
 
 /**
  * Structured error for CLI / agent-facing tools.
@@ -35,7 +35,7 @@ export const UNKNOWN_ERROR = 'UNKNOWN'
 export class CliError extends Error {
   /**
    * @param message - Human-readable error message
-   * @param code - Machine-readable error code (default: `'UNKNOWN'`)
+   * @param code - Machine-readable error code (default: `'UNKNOWN_ERROR'`)
    * @param suggestions - Optional actionable hints surfaced to the user/agent
    */
   constructor(

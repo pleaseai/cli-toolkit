@@ -16,14 +16,14 @@ class ForeignCliError extends Error {
 
 describe('errorOutput', () => {
   test('should build a minimal payload without suggestions', () => {
-    expect(errorOutput('boom', 'UNKNOWN')).toEqual({
+    expect(errorOutput('boom', UNKNOWN_ERROR)).toEqual({
       error: 'boom',
-      code: 'UNKNOWN',
+      code: UNKNOWN_ERROR,
     })
   })
 
   test('should omit the help key when suggestions are empty', () => {
-    const output = errorOutput('boom', 'UNKNOWN', [])
+    const output = errorOutput('boom', UNKNOWN_ERROR, [])
     expect(output).not.toHaveProperty('help')
   })
 
@@ -63,17 +63,17 @@ describe('toErrorOutput', () => {
     })
   })
 
-  test('should fall back to UNKNOWN for a generic Error', () => {
+  test('should fall back to UNKNOWN_ERROR for a generic Error', () => {
     expect(toErrorOutput(new Error('boom'))).toEqual({
       error: 'boom',
-      code: 'UNKNOWN',
+      code: 'UNKNOWN_ERROR',
     })
   })
 
   test('should stringify a non-error value', () => {
     expect(toErrorOutput('boom')).toEqual({
       error: 'boom',
-      code: 'UNKNOWN',
+      code: 'UNKNOWN_ERROR',
     })
   })
 })
