@@ -15,6 +15,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history so SonarCloud can attribute new code / blame accurately.
+          fetch-depth: 0
+          # No later step needs authenticated git; keep the token out of .git/config.
+          persist-credentials: false
 
       - uses: oven-sh/setup-bun@v2
         with:
@@ -29,10 +34,7 @@ jobs:
       - name: Type check
         run: bun run type-check
 
-      - name: Run tests
-        run: bun test
-
-      - name: Generate coverage report
+      - name: Run tests with coverage
         run: bun run test:coverage
 
       - name: Upload coverage reports to Codecov
@@ -41,6 +43,13 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
         continue-on-error: true
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@713881670b6b3676cda39549040e2d88c70d582e # v8.2.0
+        continue-on-error: true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: Build
         run: bun run build
