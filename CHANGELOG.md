@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/pleaseai/cli-toolkit/compare/v0.3.0...v0.4.0) (2026-07-01)
+
+
+### Features
+
+* add agent-facing CLI skills ([#5](https://github.com/pleaseai/cli-toolkit/issues/5)) ([32e5e5a](https://github.com/pleaseai/cli-toolkit/commit/32e5e5aeee359379a23e127b69477a846135bc6b))
+
+
+### Bug Fixes
+
+* **ci:** publish to npm with provenance instead of bun publish ([#12](https://github.com/pleaseai/cli-toolkit/issues/12)) ([cf508f1](https://github.com/pleaseai/cli-toolkit/commit/cf508f1520c6c3a69c184be8967e1a8950bc6cdb))
+
 ## [0.3.0](https://github.com/pleaseai/cli-toolkit/compare/v0.2.0...v0.3.0) (2026-06-27)
 
 
