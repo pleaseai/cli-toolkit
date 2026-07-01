@@ -1,0 +1,40 @@
+CONTRIBUTING.md
+  s_f0c447c07ea585::t_a837afef5206ef 1-46
+.github/ISSUE_TEMPLATE/bug_report.md
+  s_f0c447c07ea585::t_65d1c827dcc3b8 1-31
+CODE_OF_CONDUCT.md
+  s_f0c447c07ea585::t_459123385b7cb4 1-132
+.github/ISSUE_TEMPLATE/config.yml
+  s_f0c447c07ea585::t_7f31979fd6843f 1-8
+.github/PULL_REQUEST_TEMPLATE.md
+  s_f0c447c07ea585::t_6ccd8d6ad4d264 1-17
+SECURITY.md
+  s_f0c447c07ea585::t_c429b3f0bf3840 1-39
+.worktreeinclude
+  s_f0c447c07ea585::t_eb0b25e4b1199a 1-13
+LICENSE
+  s_f0c447c07ea585::t_63e271b37bee3d 1-2,4-21
+  s_f0c447c07ea585::t_46a2c770ac784e 3
+orca.yaml
+  s_f0c447c07ea585::t_67ef2b77cb1d19 1-18
+README.md
+  s_f0c447c07ea585::t_94fdcc58fd2105 8
+.github/ISSUE_TEMPLATE/feature_request.md
+  s_f0c447c07ea585::t_f208fca154bd07 1-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "7ca4cc9858f6625a5001614cfc3c9c33fec18ef8",
+  "prompts": {},
+  "sessions": {
+    "s_f0c447c07ea585": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9026827b-9f5e-4cb2-ac4f-0218019c1c6d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
