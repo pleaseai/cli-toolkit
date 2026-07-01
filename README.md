@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/pleaseai/cli-toolkit/graph/badge.svg?token=lAPii2Uj1a)](https://codecov.io/gh/pleaseai/cli-toolkit)
 [![Socket Badge](https://socket.dev/api/badge/npm/package/@pleaseai/cli-toolkit)](https://socket.dev/npm/package/@pleaseai/cli-toolkit)
 [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/pleaseai/cli-toolkit/blob/main/LICENSE)
 
 Shared CLI utilities for LLM-focused command-line tools.
 
