@@ -1,0 +1,28 @@
+.gitignore
+  s_c337166f75c26e::t_4b126c8887c68d 35-37
+src/errors/output.ts
+  s_c337166f75c26e::t_065960b1c277e7 111-114,116,119-124
+test/errors/output.test.ts
+  s_c337166f75c26e::t_a24484fe9fa33f 69-86
+  s_c337166f75c26e::t_d3e497ff06df25 117-134
+eslint.config.js
+  s_c337166f75c26e::t_ff37aaa14b3a84 5
+README.md
+  s_c337166f75c26e::t_4b126c8887c68d 124-125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "9f03e73f5c9e8f97fdf6a765c51d9ab5c1a85684",
+  "prompts": {},
+  "sessions": {
+    "s_c337166f75c26e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7c32aafb-1a0e-43ee-85c9-807d4c29521c",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Minsu Lee <minsu.lee@pleaseai.dev>"
+    }
+  }
+}
