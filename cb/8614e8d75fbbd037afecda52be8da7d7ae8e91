@@ -1,0 +1,46 @@
+src/errors/index.ts
+  s_c337166f75c26e::t_d207c87698d40d 4-10,30-48
+  s_c337166f75c26e::t_9da297b2af9d4c 24-25,28-29
+src/validation/numeric.ts
+  s_c337166f75c26e::t_7a34682232d24c 23,28,53,84
+test/errors/error.test.ts
+  s_c337166f75c26e::t_ee1a62d684b70f 1,8-9,23,26,40,43-54,57-59,68,86-89,99,106-109,111
+src/errors/output.ts
+  s_c337166f75c26e::t_fb43011474f84a 1,7-12,15,19-34,40-41,45,50-53,59,62-72,80-83,101-108,110-116,118
+README.md
+  s_c337166f75c26e::t_062b96afbd0214 249,252,255
+  s_c337166f75c26e::t_e32f8f720708ef 123-125,137-142,145,152-166
+  s_c337166f75c26e::t_c4c1f451fd5418 184
+  s_c337166f75c26e::t_b3fb1620300239 167-168
+src/errors/error.ts
+  s_c337166f75c26e::t_4805c23764a9c8 1-3,19-28,32-39,42-44,48-52,55-58,61,63-66,79-81,104-107,121
+src/validation/text.ts
+  s_c337166f75c26e::t_c526b8d553b942 55
+  s_c337166f75c26e::t_7a34682232d24c 26,119
+src/index.ts
+  s_c337166f75c26e::t_123fd8cc5461f1 18-19,23-27,29-31,35-36,39-49
+package.json
+  s_c337166f75c26e::t_a0dd872dbcc192 70
+src/output/json.ts
+  s_c337166f75c26e::t_f72c219ba4ba1f 79-82
+test/errors/output.test.ts
+  s_c337166f75c26e::t_64b74b095bb6b7 1,6-9,22,29-34,37-43,46-49,55-60,64-86,90-91,95,100
+bun.lock
+  s_c337166f75c26e::t_36c7021501e1e8 3,9,138-139
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "cb8614e8d75fbbd037afecda52be8da7d7ae8e91",
+  "prompts": {},
+  "sessions": {
+    "s_c337166f75c26e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7c32aafb-1a0e-43ee-85c9-807d4c29521c",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Minsu Lee <minsu.lee@pleaseai.dev>"
+    }
+  }
+}
