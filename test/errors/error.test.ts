@@ -1,9 +1,12 @@
+import { VercelError } from '@vercel/error'
 import { describe, expect, test } from 'bun:test'
 import { CliError, exitCodeForError, isCliError, UNKNOWN_ERROR, VALIDATION_ERROR } from '../../src/errors/error'
 
 /**
  * A `CliError` from a second copy of the module: same shape, distinct class.
  * Reproduces the multi-instance scenario where `instanceof CliError` fails.
+ * Uses the legacy (pre-`@vercel/error`) shape with a `suggestions` array to
+ * also cover the cross-version boundary.
  */
 class ForeignCliError extends Error {
   constructor(
@@ -17,9 +20,10 @@ class ForeignCliError extends Error {
 }
 
 describe('CliError', () => {
-  test('should be an instance of Error', () => {
+  test('should be an instance of Error and VercelError', () => {
     const error = new CliError('boom')
     expect(error).toBeInstanceOf(Error)
+    expect(error).toBeInstanceOf(VercelError)
     expect(error).toBeInstanceOf(CliError)
   })
 
@@ -33,16 +37,26 @@ describe('CliError', () => {
   })
 
   test('should carry a custom code', () => {
-    expect(new CliError('boom', 'NOT_FOUND').code).toBe('NOT_FOUND')
+    expect(new CliError('boom', { code: 'NOT_FOUND' }).code).toBe('NOT_FOUND')
   })
 
-  test('should default suggestions to an empty array', () => {
-    expect(new CliError('boom').suggestions).toEqual([])
+  test('should carry structured context fields', () => {
+    const error = new CliError('boom', {
+      code: 'NOT_FOUND',
+      reason: 'The issue was deleted.',
+      hint: 'It may have been transferred.',
+      fix: 'Run `list` to see open issues',
+      link: 'https://example.com/docs/errors/NOT_FOUND',
+    })
+    expect(error.reason).toBe('The issue was deleted.')
+    expect(error.hint).toBe('It may have been transferred.')
+    expect(error.fix).toBe('Run `list` to see open issues')
+    expect(error.link).toBe('https://example.com/docs/errors/NOT_FOUND')
   })
 
-  test('should carry suggestions', () => {
-    const error = new CliError('boom', 'NOT_FOUND', ['try this'])
-    expect(error.suggestions).toEqual(['try this'])
+  test('should chain a cause', () => {
+    const cause = new Error('root')
+    expect(new CliError('boom', { cause }).cause).toBe(cause)
   })
 
   test('should set the error name', () => {
@@ -51,7 +65,7 @@ describe('CliError', () => {
 
   test('should be catchable as a thrown error', () => {
     expect(() => {
-      throw new CliError('cannot be empty', VALIDATION_ERROR)
+      throw new CliError('cannot be empty', { code: VALIDATION_ERROR })
     }).toThrow('cannot be empty')
   })
 })
@@ -69,6 +83,10 @@ describe('isCliError', () => {
     expect(isCliError(new Error('boom'))).toBe(false)
   })
 
+  test('should reject a plain VercelError', () => {
+    expect(isCliError(new VercelError('boom', { code: 'X' }))).toBe(false)
+  })
+
   test('should reject non-error values', () => {
     expect(isCliError('boom')).toBe(false)
     expect(isCliError({ name: 'CliError', code: 'X' })).toBe(false)
@@ -78,15 +96,19 @@ describe('isCliError', () => {
 
 describe('exitCodeForError', () => {
   test('should return 2 for validation errors', () => {
-    expect(exitCodeForError(new CliError('bad', VALIDATION_ERROR))).toBe(2)
+    expect(exitCodeForError(new CliError('bad', { code: VALIDATION_ERROR }))).toBe(2)
   })
 
   test('should return 2 for a validation CliError from another module copy', () => {
     expect(exitCodeForError(new ForeignCliError('bad', VALIDATION_ERROR))).toBe(2)
   })
 
+  test('should return 2 for a plain VercelError tagged VALIDATION_ERROR', () => {
+    expect(exitCodeForError(new VercelError('bad', { code: VALIDATION_ERROR }))).toBe(2)
+  })
+
   test('should return 1 for CliError with a non-validation code', () => {
-    expect(exitCodeForError(new CliError('bad', 'NOT_FOUND'))).toBe(1)
+    expect(exitCodeForError(new CliError('bad', { code: 'NOT_FOUND' }))).toBe(1)
   })
 
   test('should return 1 for a generic Error', () => {

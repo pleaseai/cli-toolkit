@@ -15,16 +15,38 @@
 export {
   // Structured error class, codes, and exit-code mapping
   CliError,
+  // Error factory (from @vercel/error)
+  createErrors,
   // Structured error output
   errorOutput,
   exitCodeForError,
+  // Message / cause-chain helpers (from @vercel/error)
+  getMessage,
+  getRootCause,
+  // Guards (from @vercel/error)
+  hasCode,
   isCliError,
+  isError,
+  isErrorLike,
+  isVercelError,
   toErrorOutput,
   UNKNOWN_ERROR,
   VALIDATION_ERROR,
+  // Base error class (from @vercel/error)
+  VercelError,
 } from './errors/index.ts'
 
-export type { ErrorOutput } from './errors/index.ts'
+export type {
+  CliErrorOptions,
+  CreateErrorsOptions,
+  ErrorAttributes,
+  ErrorFactory,
+  ErrorLike,
+  ErrorMetadata,
+  ErrorOutput,
+  ErrorOutputDetails,
+  VercelErrorOptions,
+} from './errors/index.ts'
 
 // ============================================================================
 // i18n Module

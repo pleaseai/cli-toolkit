@@ -20,12 +20,12 @@ import { CliError, VALIDATION_ERROR } from '../errors/error.ts'
 export function validatePositiveInteger(value: string, fieldName = 'Value'): number {
   // Check if the string contains only digits
   if (!/^\d+$/.test(value)) {
-    throw new CliError(`${fieldName} must be a positive integer`, VALIDATION_ERROR)
+    throw new CliError(`${fieldName} must be a positive integer`, { code: VALIDATION_ERROR })
   }
 
   const parsed = Number.parseInt(value, 10)
   if (Number.isNaN(parsed) || parsed <= 0) {
-    throw new CliError(`${fieldName} must be a positive integer`, VALIDATION_ERROR)
+    throw new CliError(`${fieldName} must be a positive integer`, { code: VALIDATION_ERROR })
   }
   return parsed
 }
@@ -50,7 +50,7 @@ export function validateNumericId(value: string | number, fieldName = 'ID'): num
   const num = typeof value === 'string' ? Number.parseInt(value, 10) : value
 
   if (Number.isNaN(num) || num <= 0 || !Number.isInteger(num)) {
-    throw new CliError(`${fieldName} must be a positive integer`, VALIDATION_ERROR)
+    throw new CliError(`${fieldName} must be a positive integer`, { code: VALIDATION_ERROR })
   }
 
   return num
@@ -81,7 +81,7 @@ export function validateRange(
   fieldName = 'Value',
 ): number {
   if (value < min || value > max) {
-    throw new CliError(`${fieldName} must be between ${min} and ${max}`, VALIDATION_ERROR)
+    throw new CliError(`${fieldName} must be between ${min} and ${max}`, { code: VALIDATION_ERROR })
   }
   return value
 }

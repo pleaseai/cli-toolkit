@@ -67,6 +67,7 @@
   },
   "dependencies": {
     "@byjohann/toon": "^0.3.0",
+    "@vercel/error": "^0.0.2",
     "commander": "^12.1.0",
     "es-toolkit": "^1.31.0"
   },

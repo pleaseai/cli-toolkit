@@ -76,10 +76,10 @@ export function validateFormat(format: unknown): OutputFormat {
     const formatStr = format === undefined || format === null
       ? String(format)
       : `${format}`
-    throw new CliError(
-      `Invalid output format: ${formatStr}. Supported formats: ${VALID_FORMATS.join(', ')}`,
-      VALIDATION_ERROR,
-    )
+    throw new CliError(`Invalid output format: ${formatStr}`, {
+      code: VALIDATION_ERROR,
+      fix: `Use one of the supported formats: ${VALID_FORMATS.join(', ')}`,
+    })
   }
   return format
 }

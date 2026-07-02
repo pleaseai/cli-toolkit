@@ -2,6 +2,7 @@ import antfu from '@antfu/eslint-config'
 
 export default antfu({
   type: 'lib',
+  ignores: ['.impeccable'],
   typescript: true,
   formatters: true,
   stylistic: {
