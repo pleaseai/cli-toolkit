@@ -66,6 +66,24 @@ describe('toErrorOutput', () => {
     })
   })
 
+  test('should preserve all four context fields from a CliError', () => {
+    const error = new CliError('Issue not found', {
+      code: 'NOT_FOUND',
+      reason: 'the issue was deleted',
+      hint: 'run list',
+      fix: 'pick an open issue id',
+      link: 'https://example.com/docs/errors/NOT_FOUND',
+    })
+    expect(toErrorOutput(error)).toEqual({
+      error: 'Issue not found',
+      code: 'NOT_FOUND',
+      reason: 'the issue was deleted',
+      hint: 'run list',
+      fix: 'pick an open issue id',
+      link: 'https://example.com/docs/errors/NOT_FOUND',
+    })
+  })
+
   test('should map a plain VercelError through', () => {
     const error = new VercelError('Pool exhausted', {
       code: 'pool_exhausted',
@@ -93,6 +111,24 @@ describe('toErrorOutput', () => {
       error: 'Issue not found',
       code: 'NOT_FOUND',
       hint: 'run list\ncheck the id',
+    })
+  })
+
+  test('should carry context fields from a foreign new-style CliError, with suggestions taking priority for hint', () => {
+    const error = new ForeignCliError('Issue not found', 'NOT_FOUND', ['run list'])
+    Object.assign(error, {
+      reason: 'the issue was deleted',
+      hint: 'native hint (overridden by suggestions)',
+      fix: 'pick an open issue id',
+      link: 'https://example.com/docs/errors/NOT_FOUND',
+    })
+    expect(toErrorOutput(error)).toEqual({
+      error: 'Issue not found',
+      code: 'NOT_FOUND',
+      reason: 'the issue was deleted',
+      hint: 'run list',
+      fix: 'pick an open issue id',
+      link: 'https://example.com/docs/errors/NOT_FOUND',
     })
   })
 

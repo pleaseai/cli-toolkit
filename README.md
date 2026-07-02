@@ -121,8 +121,8 @@ const username = validatePattern('user123', /^[a-z0-9]+$/, 'Username', 'alphanum
 
 Throw structured errors with machine-readable codes and render them consistently
 for agents to parse. Built on [`@vercel/error`](https://github.com/vercel-labs/error),
-so every error can answer *what* happened (`message`), *why* (`reason`), *what
-could help* (`hint`), *how to fix it* (`fix`), and *where to learn more* (`link`):
+so every error can answer _what_ happened (`message`), _why_ (`reason`), _what
+could help_ (`hint`), _how to fix it_ (`fix`), and _where to learn more_ (`link`):
 
 ```typescript
 import {

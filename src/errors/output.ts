@@ -108,12 +108,20 @@ export function toErrorOutput(error: unknown): ErrorOutput {
   }
   if (isCliError(error)) {
     // Structurally-detected copy from another bundle or an older toolkit
-    // version; legacy `suggestions` (if any) collapse into `hint`.
+    // version. Legacy `suggestions` (if any) collapse into `hint`; any
+    // new-style context fields present on the object are carried through so
+    // a VercelError-derived copy that slips past `isVercelError` (e.g. a
+    // future bundle with a different Symbol tag) doesn't silently lose them.
     const suggestions = (error as { suggestions?: unknown }).suggestions
-    const hint = Array.isArray(suggestions) && suggestions.length > 0
+    const legacyHint = Array.isArray(suggestions) && suggestions.length > 0
       ? suggestions.join('\n')
       : undefined
-    return errorOutput(error.message, error.code, { hint })
+    return errorOutput(error.message, error.code, {
+      reason: error.reason,
+      hint: legacyHint ?? error.hint,
+      fix: error.fix,
+      link: error.link,
+    })
   }
   return errorOutput(getMessage(error) ?? String(error), UNKNOWN_ERROR)
 }
