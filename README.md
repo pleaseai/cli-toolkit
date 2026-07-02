@@ -120,7 +120,9 @@ const username = validatePattern('user123', /^[a-z0-9]+$/, 'Username', 'alphanum
 ### Errors Module
 
 Throw structured errors with machine-readable codes and render them consistently
-for agents to parse:
+for agents to parse. Built on [`@vercel/error`](https://github.com/vercel-labs/error),
+so every error can answer *what* happened (`message`), *why* (`reason`), *what
+could help* (`hint`), *how to fix it* (`fix`), and *where to learn more* (`link`):
 
 ```typescript
 import {
@@ -132,15 +134,36 @@ import {
 import { outputData } from '@pleaseai/cli-toolkit/output'
 
 try {
-  if (!issue)
-    throw new CliError('Issue #999 not found', 'NOT_FOUND', ['Run `gh-please issue list`'])
+  if (!issue) {
+    throw new CliError('Issue #999 not found', {
+      code: 'NOT_FOUND',
+      fix: 'Run `gh-please issue list` to see open issues',
+    })
+  }
 }
 catch (error) {
-  // Render a stable { error, code, help } payload (JSON or TOON)
+  // Render a stable { error, code, reason?, hint?, fix?, link? } payload (JSON or TOON)
   outputData(toErrorOutput(error), 'toon')
   // Map to a process exit code (2 for validation errors, otherwise 1)
   process.exitCode = exitCodeForError(error)
 }
+```
+
+For tools with many error sites, `createErrors` (re-exported from
+`@vercel/error`) builds a factory that injects a shared scope and derives docs
+links from error codes:
+
+```typescript
+import { CliError, createErrors } from '@pleaseai/cli-toolkit/errors'
+
+const errors = createErrors({
+  scope: 'gh-please',
+  ErrorClass: CliError,
+  docsBaseUrl: 'https://example.com/docs/errors',
+})
+
+errors.raise('Issue #999 not found', { code: 'NOT_FOUND' })
+// throws a CliError with link https://example.com/docs/errors/NOT_FOUND
 ```
 
 The built-in validators already throw `CliError` tagged with `VALIDATION_ERROR`
@@ -158,7 +181,7 @@ consistent structured errors and exit codes for free.
 import { isCliError } from '@pleaseai/cli-toolkit/errors'
 
 if (isCliError(error)) {
-  // error.code / error.suggestions are safe to read here
+  // error.code / error.reason / error.hint / error.fix are safe to read here
 }
 ```
 
@@ -223,12 +246,13 @@ collapseHomeDirectory('/Users/alice/project/bin', '/Users/alice') // '~/project/
 
 ### Errors Module
 
-- `CliError` - Structured error with `code` and `suggestions`
+- `CliError` - Structured error extending `VercelError`; carries `code` (always set) plus `reason`, `hint`, `fix`, `link`, `metadata`, `cause`, ...
 - `isCliError(error)` - Type guard for `CliError`, robust across subpath/version boundaries (prefer over `instanceof`)
 - `exitCodeForError(error)` - Map an error to a process exit code (`2` for validation, else `1`)
-- `errorOutput(message, code, suggestions?)` - Build a `{ error, code, help? }` payload
+- `errorOutput(message, code, details?)` - Build a `{ error, code, reason?, hint?, fix?, link? }` payload
 - `toErrorOutput(error)` - Convert any thrown value into a structured payload
 - `VALIDATION_ERROR` / `UNKNOWN_ERROR` - Built-in error code constants
+- Re-exported from `@vercel/error`: `VercelError`, `createErrors`, `isVercelError`, `isError`, `isErrorLike`, `hasCode`, `getMessage`, `getRootCause`
 
 ## TypeScript Support
 

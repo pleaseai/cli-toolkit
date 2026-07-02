@@ -23,7 +23,7 @@ export function validateNonEmptyString(
   fieldName = 'Value',
 ): string {
   if (!value || value.trim().length === 0) {
-    throw new CliError(`${fieldName} cannot be empty`, VALIDATION_ERROR)
+    throw new CliError(`${fieldName} cannot be empty`, { code: VALIDATION_ERROR })
   }
   return value.trim()
 }
@@ -52,7 +52,7 @@ export function validateMaxLength(
   if (value.length > maxLength) {
     throw new CliError(
       `${fieldName} cannot exceed ${maxLength} characters (got ${value.length})`,
-      VALIDATION_ERROR,
+      { code: VALIDATION_ERROR },
     )
   }
   return value
@@ -116,7 +116,7 @@ export function validatePattern(
     const description = patternDescription
       ? `be ${patternDescription}`
       : `match pattern ${pattern.toString()}`
-    throw new CliError(`${fieldName} must ${description}`, VALIDATION_ERROR)
+    throw new CliError(`${fieldName} must ${description}`, { code: VALIDATION_ERROR })
   }
   return value
 }
