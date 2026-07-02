@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0](https://github.com/pleaseai/cli-toolkit/compare/v0.4.0...v0.5.0) (2026-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **errors:** CliError's constructor is now (message, options) instead of (message, code, suggestions); suggestions is replaced by hint/fix. The ErrorOutput payload drops help in favor of reason/hint/fix/link (legacy suggestions from older toolkit copies still map onto hint). errorOutput() takes a details object instead of a suggestions array, and validateFormat's message moved its supported-formats list into fix.
+
+### Features
+
+* **errors:** rebuild errors module on @vercel/error ([#15](https://github.com/pleaseai/cli-toolkit/issues/15)) ([2963421](https://github.com/pleaseai/cli-toolkit/commit/2963421321fd6bb608d60113afebebb82bc7dfa7))
+
 ## [0.4.0](https://github.com/pleaseai/cli-toolkit/compare/v0.3.0...v0.4.0) (2026-07-01)
 
 
